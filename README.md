@@ -188,22 +188,31 @@ class Report {
 ## 5. Correção de Violação de Segregação de Interface (Interface Segregation Principle)
 
 ```java
-public class InterfaceSegregationViolation {
+public class InterfaceSegregationPrinciple {
     public static void main(String[] args) {
         MultiFunctionPrinter printer = new MultiFunctionPrinter();
         printer.print();
         printer.scan();
         printer.fax();
+
+        SimplePrinter simplePrinter = new SimplePrinter();
+        simplePrinter.print();
     }
 }
 
-interface Machine {
+interface Printer {
     void print();
+}
+
+interface Scanner {
     void scan();
+}
+
+interface Fax {
     void fax();
 }
 
-class MultiFunctionPrinter implements Machine {
+class MultiFunctionPrinter implements Printer, Scanner, Fax {
     public void print() {
         System.out.println("Printing...");
     }
@@ -214,6 +223,12 @@ class MultiFunctionPrinter implements Machine {
 
     public void fax() {
         System.out.println("Faxing...");
+    }
+}
+
+class SimplePrinter implements Printer {
+    public void print() {
+        System.out.println("Printing...");
     }
 }
 ```
